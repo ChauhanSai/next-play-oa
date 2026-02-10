@@ -61,8 +61,9 @@ export default function LandingScreen() {
         pointerEvents={showSignInSheet ? "auto" : "none"}
       >
         <TouchableOpacity
-          style={styles.fadeOverlay}
-          onPressOut={() => setShowSignInSheet(false)}
+          style={styles.fadeOverlayTouchable}
+          activeOpacity={1}
+          onPress={() => setShowSignInSheet(false)}
         />
       </Animated.View>
 
@@ -73,11 +74,13 @@ export default function LandingScreen() {
         onRequestClose={() => setShowSignInSheet(false)}
       >
         <TouchableOpacity
-          style={styles.fadeOverlay}
+          style={styles.modalOverlay}
           activeOpacity={1}
-          onPressOut={() => setShowSignInSheet(false)}
+          onPress={() => setShowSignInSheet(false)}
         >
-          <View style={styles.sheet} />
+          <View style={styles.sheet}>
+            <Text style={styles.sheetTitle}>Sign In</Text>
+          </View>
         </TouchableOpacity>
       </Modal>
     </View>
@@ -162,8 +165,15 @@ const styles = StyleSheet.create({
     bottom: -120,
   },
   fadeOverlay: {
-    flex: 1,
+    ...StyleSheet.absoluteFillObject,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
+    zIndex: 5,
+  },
+  fadeOverlayTouchable: {
+    flex: 1,
+  },
+  modalOverlay: {
+    flex: 1,
     justifyContent: "flex-end",
   },
   sheet: {
@@ -173,5 +183,11 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingBottom: 40,
     minHeight: "50%",
+  },
+  sheetTitle: {
+    fontSize: 24,
+    fontWeight: "700",
+    color: "#3646C6",
+    marginTop: 16,
   },
 });
