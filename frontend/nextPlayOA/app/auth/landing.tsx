@@ -6,6 +6,7 @@ import {
   Text,
   Modal,
   Animated,
+  TextInput,
 } from "react-native";
 import { useState, useRef, useEffect } from "react";
 
@@ -13,6 +14,8 @@ import { Link } from "expo-router";
 
 export default function LandingScreen() {
   const [showSignInSheet, setShowSignInSheet] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -29,9 +32,12 @@ export default function LandingScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={[styles.circle, styles.circle1]} />
-      <View style={[styles.circle, styles.circle2]} />
-      <View style={[styles.circle, styles.circle3]} />
+      {!showSignInSheet && <View style={[styles.circle, styles.circle1]} />}
+      {!showSignInSheet && <View style={[styles.circle, styles.circle2]} />}
+      {!showSignInSheet && <View style={[styles.circle, styles.circle3]} />}
+      {showSignInSheet && <View style={[styles.circle, styles.circle1green]} />}
+      {showSignInSheet && <View style={[styles.circle, styles.circle2green]} />}
+      {showSignInSheet && <View style={[styles.circle, styles.circle3green]} />}
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity
@@ -54,10 +60,7 @@ export default function LandingScreen() {
       </View>
 
       <Animated.View
-        style={[
-          styles.fadeOverlay,
-          { opacity: fadeAnim },
-        ]}
+        style={[styles.fadeOverlay, { opacity: fadeAnim }]}
         pointerEvents={showSignInSheet ? "auto" : "none"}
       >
         <TouchableOpacity
@@ -79,7 +82,34 @@ export default function LandingScreen() {
           onPress={() => setShowSignInSheet(false)}
         >
           <View style={styles.sheet}>
-            <Text style={styles.sheetTitle}>Sign In</Text>
+            <Text style={styles.sheetTitle}>Welcome Back</Text>
+
+            <TextInput
+              style={styles.input}
+              placeholder="Email"
+              value={email}
+              onChangeText={setEmail}
+              placeholderTextColor="#999"
+            />
+
+            <TextInput
+              style={styles.input}
+              placeholder="Password"
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry
+              placeholderTextColor="#999"
+            />
+
+            <View style={styles.buttonContainerGreen}>
+              <TouchableOpacity style={styles.signInButtonGreen}>
+                <Text style={styles.signInButtonTextGreen}>Sign In</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity>
+                <Text style={styles.forgotPassword}>Forgot Password?</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </TouchableOpacity>
       </Modal>
@@ -123,6 +153,24 @@ const styles = StyleSheet.create({
     marginTop: -1300 + OVERLAP * 3.5,
     zIndex: 1,
   },
+  circle1green: {
+    backgroundColor: "#335D47",
+    marginLeft: -400,
+    marginTop: -1300,
+    zIndex: 3,
+  },
+  circle2green: {
+    backgroundColor: "#789f8b",
+    marginLeft: -400 - OVERLAP * 3,
+    marginTop: -1300 + OVERLAP * 1.75,
+    zIndex: 2,
+  },
+  circle3green: {
+    backgroundColor: "#BDE1CE",
+    marginLeft: -400 - OVERLAP * 3,
+    marginTop: -1300 + OVERLAP * 3.5,
+    zIndex: 1,
+  },
   buttonContainer: {
     position: "absolute",
     bottom: "25%",
@@ -158,6 +206,23 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "700",
   },
+  buttonContainerGreen: {
+    alignItems: "center",
+  },
+  signInButtonGreen: {
+    backgroundColor: "#335D47",
+    paddingVertical: 16,
+    paddingHorizontal: 80,
+    borderRadius: 30,
+    width: "80%",
+    alignItems: "center",
+    marginTop: 32,
+  },
+  signInButtonTextGreen: {
+    color: "#FFFFFF",
+    fontSize: 18,
+    fontWeight: "700",
+  },
   logo: {
     width: 200,
     height: 60,
@@ -178,16 +243,33 @@ const styles = StyleSheet.create({
   },
   sheet: {
     backgroundColor: "#FFFFFF",
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
     padding: 20,
     paddingBottom: 40,
     minHeight: "50%",
   },
   sheetTitle: {
-    fontSize: 24,
+    fontSize: 38,
     fontWeight: "700",
-    color: "#3646C6",
-    marginTop: 16,
+    color: "#000000",
+    marginTop: 32,
+    textAlign: "center",
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#DDD",
+    borderRadius: 8,
+    padding: 12,
+    marginTop: 24,
+    fontSize: 16,
+    color: "#000",
+  },
+  forgotPassword: {
+    color: "#898989",
+    fontSize: 24,
+    fontWeight: "600",
+    marginTop: 24,
+    textAlign: "center",
   },
 });
