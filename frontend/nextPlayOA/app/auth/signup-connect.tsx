@@ -1,9 +1,15 @@
 import { Image } from "expo-image";
-import { StyleSheet, View, TouchableOpacity, Text, TextInput } from "react-native";
-
-import { Link } from "expo-router";
+import { StyleSheet, View, TouchableOpacity, Text, TextInput, Linking } from "react-native";
 
 export default function SignUpScreen() {
+  const handleSpotifyPress = async () => {
+    try {
+      await Linking.openURL("https://spotify.com");
+    } catch (error) {
+      console.error("Failed to open Spotify:", error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={[styles.circle, styles.circle1]} />
@@ -11,27 +17,23 @@ export default function SignUpScreen() {
       <View style={[styles.circle, styles.circle3]} />
 
       <View style={styles.centerContent}>
-        <Text style={styles.welcomeText}>Welcome to</Text>
-        <Image
-          source={require("@/assets/images/Nostalgio..png")}
-          style={styles.logo}
-        />
-        <Text style={styles.welcomeSubtitle}>We just need some quick info</Text>
-        <TextInput
-          style={styles.nameInput}
-          placeholder="Name"
-          placeholderTextColor="#999999"
-        />
-        <Link href="/auth/signup-details" asChild>
-          <TouchableOpacity>
-            <Image
-              source={require("@/assets/images/arrow_forward.png")}
-              style={styles.arrow}
-            />
-          </TouchableOpacity>
-        </Link>
-      </View>
+        <Text style={styles.welcomeText}>Connect your</Text>
+        <Text style={styles.welcomeText}>account</Text>
 
+        <Image
+          source={require("@/assets/images/spotify_icon.png")}
+          style={styles.icon}
+        />
+
+        <View style={styles.buttonContainerGreen}>
+          <TouchableOpacity 
+            style={styles.signInButtonGreen}
+            onPress={handleSpotifyPress}
+          >
+            <Text style={styles.signInButtonTextGreen}>Open in Spotify</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
 
       <View style={styles.progressContainer}>
         <View style={styles.progressBar} />
@@ -62,19 +64,19 @@ const styles = StyleSheet.create({
     borderRadius: SIZE / 2,
   },
   circle1: {
-    backgroundColor: "#6177EA",
+    backgroundColor: "#789f8b",
     marginLeft: LEFT,
     marginTop: TOP,
     zIndex: 3,
   },
   circle2: {
-    backgroundColor: "#6177EA",
+    backgroundColor: "#789f8b",
     marginLeft: LEFT - OVERLAP * 3,
     marginTop: TOP + OVERLAP * 1.75,
     zIndex: 2,
   },
   circle3: {
-    backgroundColor: "#A8C0FF",
+    backgroundColor: "#BDE1CE",
     marginLeft: LEFT - OVERLAP * 3,
     marginTop: TOP + OVERLAP * 3.5,
     zIndex: 1,
@@ -92,7 +94,6 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: "#000000",
     textAlign: "center",
-    marginBottom: 12,
   },
   welcomeSubtitle: {
     fontSize: 18,
@@ -102,9 +103,10 @@ const styles = StyleSheet.create({
     marginTop: 12,
     marginBottom: 12,
   },
-  logo: {
-    width: 200,
-    height: 60,
+  icon: {
+    width: 125,
+    aspectRatio: 1,
+    marginTop: 16,
   },
   nameInput: {
     marginTop: 16,
@@ -118,9 +120,26 @@ const styles = StyleSheet.create({
     fontWeight: "800",
   },
   arrow: {
-    marginTop: 32,
+    marginTop: 78,
     width: 60,
     aspectRatio: 1,
+  },
+  buttonContainerGreen: {
+    alignItems: "center",
+  },
+  signInButtonGreen: {
+    backgroundColor: "#335D47",
+    paddingVertical: 16,
+    paddingHorizontal: 80,
+    borderRadius: 30,
+    width: "80%",
+    alignItems: "center",
+    marginTop: 32,
+  },
+  signInButtonTextGreen: {
+    color: "#FFFFFF",
+    fontSize: 18,
+    fontWeight: "700",
   },
   progressContainer: {
     position: "absolute",
@@ -128,19 +147,19 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     height: 16,
-    backgroundColor: "#D2DEFF",
+    backgroundColor: "#BDE1CE",
     zIndex: 10,
   },
   progressBar: {
     position: "absolute",
     height: "100%",
-    backgroundColor: "#D2DEFF",
+    backgroundColor: "#BDE1CE",
     width: "100%",
   },
   progressBarComplete: {
     position: "absolute",
     height: "100%",
-    backgroundColor: "#3646C6",
-    width: "25%", // Change this value to update completion
+    backgroundColor: "#335D47",
+    width: "100%", // Change this value to update completion
   },
 });

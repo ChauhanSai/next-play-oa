@@ -11,18 +11,20 @@ export default function SignUpScreen() {
       <View style={[styles.circle, styles.circle3]} />
 
       <View style={styles.centerContent}>
-        <Text style={styles.welcomeText}>Welcome to</Text>
-        <Image
-          source={require("@/assets/images/Nostalgio..png")}
-          style={styles.logo}
-        />
-        <Text style={styles.welcomeSubtitle}>We just need some quick info</Text>
+        <Text style={styles.welcomeText}>Hello, Sai</Text>
+
         <TextInput
           style={styles.nameInput}
-          placeholder="Name"
+          placeholder="Username"
           placeholderTextColor="#999999"
         />
-        <Link href="/auth/signup-details" asChild>
+        <TextInput
+          style={styles.nameInput}
+          placeholder="Email"
+          placeholderTextColor="#999999"
+        />
+
+        <Link href="/auth/signup-password" asChild>
           <TouchableOpacity>
             <Image
               source={require("@/assets/images/arrow_forward.png")}
@@ -31,7 +33,6 @@ export default function SignUpScreen() {
           </TouchableOpacity>
         </Link>
       </View>
-
 
       <View style={styles.progressContainer}>
         <View style={styles.progressBar} />
@@ -94,18 +95,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 12,
   },
-  welcomeSubtitle: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: "#898989",
-    textAlign: "center",
-    marginTop: 12,
-    marginBottom: 12,
-  },
-  logo: {
-    width: 200,
-    height: 60,
-  },
   nameInput: {
     marginTop: 16,
     width: "80%",
@@ -118,7 +107,7 @@ const styles = StyleSheet.create({
     fontWeight: "800",
   },
   arrow: {
-    marginTop: 32,
+    marginTop: 78,
     width: 60,
     aspectRatio: 1,
   },
@@ -141,6 +130,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     height: "100%",
     backgroundColor: "#3646C6",
-    width: "25%", // Change this value to update completion
+    width: "50%", // Change this value to update completion
   },
 });

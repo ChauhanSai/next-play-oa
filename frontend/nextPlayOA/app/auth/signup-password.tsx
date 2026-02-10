@@ -11,18 +11,27 @@ export default function SignUpScreen() {
       <View style={[styles.circle, styles.circle3]} />
 
       <View style={styles.centerContent}>
-        <Text style={styles.welcomeText}>Welcome to</Text>
-        <Image
-          source={require("@/assets/images/Nostalgio..png")}
-          style={styles.logo}
-        />
-        <Text style={styles.welcomeSubtitle}>We just need some quick info</Text>
+        <Text style={styles.welcomeText}>Almost there</Text>
+
         <TextInput
           style={styles.nameInput}
-          placeholder="Name"
+          placeholder="Password"
+          secureTextEntry
           placeholderTextColor="#999999"
         />
-        <Link href="/auth/signup-details" asChild>
+        <TextInput
+          style={styles.nameInput}
+          placeholder="Confirm Password"
+          secureTextEntry
+          placeholderTextColor="#999999"
+        />
+
+        <Image
+          source={require("@/assets/images/password_check.png")}
+          style={styles.passwordCheck}
+        />
+
+        <Link href="/auth/signup-connect" asChild>
           <TouchableOpacity>
             <Image
               source={require("@/assets/images/arrow_forward.png")}
@@ -31,7 +40,6 @@ export default function SignUpScreen() {
           </TouchableOpacity>
         </Link>
       </View>
-
 
       <View style={styles.progressContainer}>
         <View style={styles.progressBar} />
@@ -94,18 +102,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 12,
   },
-  welcomeSubtitle: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: "#898989",
-    textAlign: "center",
-    marginTop: 12,
-    marginBottom: 12,
-  },
-  logo: {
-    width: 200,
-    height: 60,
-  },
   nameInput: {
     marginTop: 16,
     width: "80%",
@@ -117,8 +113,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "800",
   },
+  passwordCheck: {
+    marginTop: 24,
+    aspectRatio: 20 / 11,
+    height: 140,
+  },
   arrow: {
-    marginTop: 32,
+    marginTop: 24,
     width: 60,
     aspectRatio: 1,
   },
@@ -141,6 +142,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     height: "100%",
     backgroundColor: "#3646C6",
-    width: "25%", // Change this value to update completion
+    width: "75%", // Change this value to update completion
   },
 });

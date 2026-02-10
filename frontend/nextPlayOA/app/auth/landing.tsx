@@ -257,13 +257,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   input: {
-    borderWidth: 1,
-    borderColor: "#DDD",
-    borderRadius: 8,
+    backgroundColor: "#D9D9D9",
+    color: "#898989",
+    borderRadius: 18,
     padding: 12,
     marginTop: 24,
     fontSize: 16,
-    color: "#000",
+    fontWeight: "800",
   },
   forgotPassword: {
     color: "#898989",
